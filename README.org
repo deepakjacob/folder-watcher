@@ -1,0 +1,34 @@
+* Folder Watcher
+** Introduction
+   This Rust project is a simple yet effective folder watcher. It utilizes the notify crate to monitor changes within a specified directory, reporting any file creations, modifications, or deletions in real-time.
+
+** Installation
+   Clone this repository to your local machine using:
+   #+begin_src sh
+   git clone https://your-repository-url-here
+   cd folder-watcher
+   #+end_src
+
+** Usage
+   To run the folder watcher, navigate to the project directory and execute:
+   #+begin_src sh
+   cargo run
+   #+end_src
+   This will start monitoring the current directory (and subdirectories) for any file system changes.
+
+** Code Explanation
+*** Dependencies
+    - The 'notify' crate is used for watching file system changes.
+*** Main Function
+    - A channel is set up for inter-thread communication.
+    - A watcher is created using notify's recommended_watcher, configured to watch changes recursively.
+    - The program enters a loop where it waits for events from the watcher and prints them to the console.
+
+** Handling Events
+    Events are received through a channel. Each event type is printed to the console, providing real-time updates on the file system's state.
+
+** Common Issues
+*** Runtime Errors
+    - Permissions: Make sure the executable has sufficient permissions to watch the directory.
+    - Path Errors: Verify that the path specified is correct and accessible.
+
