@@ -11,7 +11,7 @@ fn main() -> Result<()> {
     let mut watcher = notify::recommended_watcher(move |res: Result<Event>| match res {
         Ok(event) => {
             println!("new event {:?}", event);
-            if let Err(e) = tx.send(event.kind) {
+            if let Err(e) = tx.send(event) {
                 println!("error sending event for {:?}", e);
             }
         }
@@ -22,7 +22,7 @@ fn main() -> Result<()> {
 
     loop {
         match rx.recv() {
-            Ok(event_kind) => println!("Received: {:?}", event_kind),
+            Ok(event) => println!("Received: {:?}", event),
             Err(e) => {
                 println!("Receive error: {:?}", e);
                 break;
